@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List Editor</title>
+    <style>
+      .student-form input {
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .fruit-list {
+        margin-top: 2rem;
+      }
+      .fruit-list label {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Name List</h1>
+    <ol id="nameList">
+      <li><button>Delete</button> Alice</li>
+      <li>Bob</li>
+    </ol>
+    <div class="student-form">
+      <label> Student Name: <input id="studentName" /> </label>
+      <label hidden>
+        Score:
+        <input type="number" min="0" max="100" />
+      </label>
+      <button onclick="addStudent()">Add</button>
+      <button onclick="exportStudentList()">Export</button>
+    </div>
+    <script>
+      function addStudent() {
+        console.log({
+          nameList,
+          studentName: studentName.value,
+        })
+        let html = `<li>${studentName.value}</li>`
+        nameList.innerHTML += html
+        studentName.value = ''
+      }
+      function exportStudentList() {
+        console.log(Array.from(nameList.children).map(li => li.innerHTML))
+      }
+    </script>
+    <div class="fruit-list">
+      <div>
+        <label>
+          <input type="checkbox" />
+          Apple
+        </label>
+        <label>
+          <input type="checkbox" />
+          Banana
+        </label>
+      </div>
+    </div>
+    <div>
+      <ul></ul>
+    </div>
+  </body>
+</html>
