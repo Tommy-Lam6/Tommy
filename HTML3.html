@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #searchInput {
+        color: red;
+      }
+
+      #productList {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .product {
+        box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+        border-radius: 1rem;
+        width: 20rem;
+        height: 20rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .product img {
+        max-width: 100%;
+        max-height: 80%;
+      }
+      .product .name {
+        color: black;
+        font-weight: bold;
+        font-size: 1.25rem;
+      }
+      .product .price {
+        color: black;
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <input
+      type="text"
+      placeholder="Search by keyword..."
+      id="searchInput"
+      oninput="updateSearchStatus()"
+    />
+    <p id="searchStatus">Searching ...</p>
+    <div id="productList">
+      <div class="product">
+        <img
+          src="https://medias.pns.hk/publishing/PNSHK-73753-front-zoom.jpg?version=1742905617"
+          alt="Red Delicious Apple"
+        />
+        <div class="name">Red Delicious Apple</div>
+        <div class="price">$5.9</div>
+      </div>
+      <div class="product">
+        <img
+          src="https://nginx.main.dole-website.de3.amazee.io/sites/default/files/styles/1280w960h-webp-80/public/media/2025-01/cherries.png.webp?itok=qQ_CZu_u-vCmvCEGj-rzZkKTqy"
+          alt="Cherries"
+        />
+        <div class="name">Cherries</div>
+        <div class="price">$10.9</div>
+      </div>
+    </div>
+    <script>
+      let products = []
+      products[0] = {
+        name: 'Red Delicious Apple',
+        price: 5.9,
+        image:
+          'https://medias.pns.hk/publishing/PNSHK-73753-front-zoom.jpg?version=1742905617',
+      }
+      products[1] = {
+        name: 'Cherries',
+        price: 10.9,
+        image:
+          'https://nginx.main.dole-website.de3.amazee.io/sites/default/files/styles/1280w960h-webp-80/public/media/2025-01/cherries.png.webp?itok=qQ_CZu_u-vCmvCEGj-rzZkKTqy',
+      }
+      products[2] = {
+        name: 'Banana',
+        price: 1.9,
+        image:
+          'https://nutritionsource.hsph.harvard.edu/wp-content/uploads/2018/08/bananas-1354785_1920-768x512.jpg',
+      }
+      function updateSearchStatus() {
+        if (searchInput.value) {
+          searchStatus.textContent = 'Searching ' + searchInput.value + '....'
+        } else {
+          searchStatus.textContent = 'Waiting for input...'
+        }
+
+        productList.innerHTML = ''
+        for (let i = 0; i < products.length; i++) {
+          let product = products[i]
+          console.log({ i, product })
+          if (
+            !product.name
+              .toLowerCase()
+              .includes(searchInput.value.toLowerCase())
+          ) {
+            continue
+          }
+          productList.innerHTML =
+            productList.innerHTML +
+            /* html */ `
+<div class="product">
+  <img
+    src="${product.image}"
+    alt="${product.name}"
+  />
+  <div class="name">${product.name}</div>
+  <div class="price">$${product.price}</div>
+</div>
+`
+        }
+      }
+      updateSearchStatus()
+    </script>
+  </body>
+</html>
