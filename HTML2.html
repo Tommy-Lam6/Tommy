@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美食藍圖</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        nav {
+            margin: 20px 0;
+        }
+        nav button {
+            margin: 0 10px;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .container {
+            padding: 20px;
+        }
+        .restaurant {
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: white;
+        }
+        .map {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>美食藍圖</h1>
+</header>
+
+<nav>
+    <button onclick="showArea('香港')">香港</button>
+    <button onclick="showArea('台灣')">台灣</button>
+    <button onclick="showArea('日本')">日本</button>
+</nav>
+
+<div class="container" id="restaurant-list">
+    <div class="restaurant" id="restaurant1" onclick="showDetails('restaurant1')">
+        <h2>餐廳名稱 1</h2>
+        <p>美食種類：中式</p>
+    </div>
+    <div class="restaurant" id="restaurant2" onclick="showDetails('restaurant2')">
+        <h2>餐廳名稱 2</h2>
+        <p>美食種類：日式</p>
+    </div>
+</div>
+
+<div id="restaurant-detail" style="display:none;">
+    <h2 id="detail-name"></h2>
+    <p id="detail-description"></p>
+    <button onclick="goToMap()">前往 Google 地圖</button>
+    <div id="map" class="map"></div>
+</div>
+
+<script>
+    function showArea(area) {
+        document.getElementById("restaurant-list").style.display = "block";
+        // 根據選擇的地區顯示相應的餐廳列表
+    }
+
+    function showDetails(restaurantId) {
+        const details = {
+            restaurant1: {
+                name: "餐廳名稱 1",
+                description: "這是餐廳名稱 1 的詳細介紹。"
+            },
+            restaurant2: {
+                name: "餐廳名稱 2",
+                description: "這是餐廳名稱 2 的詳細介紹。"
+            }
+        };
+        const restaurant = details[restaurantId];
+        document.getElementById("detail-name").innerText = restaurant.name;
+        document.getElementById("detail-description").innerText = restaurant.description;
+        document.getElementById("restaurant-list").style.display = "none";
+        document.getElementById("restaurant-detail").style.display = "block";
+        initMap(); // 初始化地圖
+    }
+
+    function goToMap() {
+        window.open("https://www.google.com/maps", "_blank");
+    }
+
+    function initMap() {
+        const map = document.createElement('iframe');
+        map.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509158!2d144.9537363153181!3d-37.816279979751755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11f7f5%3A0x5045675218cedb0!2sVictoria%20Market!5e0!3m2!1sen!2sau!4v1611068825145!5m2!1sen!2sau";
+        map.width = "100%";
+        map.height = "400";
+        map.style.border = "0";
+        document.getElementById("map").innerHTML = ""; // 清空之前的地圖
+        document.getElementById("map").appendChild(map);
+    }
+</script>
+
+</body>
+</html>
+        
+
+    
